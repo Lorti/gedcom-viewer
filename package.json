@@ -6,10 +6,14 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "convert:build": "tsc --build -p bin",
+    "convert:watch": "tsc --watch -p bin",
+    "convert:run": "node bin/convert family.ged"
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "parse-gedcom": "^1.0.5",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.3.0",
@@ -17,6 +21,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
+    "@types/node": "^13.1.4",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-plugin-typescript": "^4.1.0",
