@@ -1,11 +1,10 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "module": "commonjs"
-    },
-    "include": [
-        "./*.ts",
-        "./*.d.ts",
-        "../src/**/*.d.ts"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs"
+  },
+  "include": [
+    "./**/*.ts",
+    "../@types/**/*.ts"
+  ]
 }

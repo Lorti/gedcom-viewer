@@ -17,7 +17,7 @@ yarn-error.log*
 *.sln
 *.sw?
 
-*.ged
+/*.ged
 graph.json
-bin/convert.js
-bin/convert.js.map
+bin/*.js
+bin/*.js.map
