@@ -1,16 +1,23 @@
 {
   "name": "gedcom-viewer",
   "version": "0.1.0",
-  "private": true,
+  "description": "GEDCOM Viewer",
   "scripts": {
+    "start": "npm run convert:build; npm run convert:run; npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "convert:build": "tsc --build -p bin",
-    "convert:watch": "tsc --watch -p bin",
+    "convert:build": "tsc --build bin/tsconfig.json",
+    "convert:watch": "tsc --watch --project bin",
     "convert:run": "node bin/convert family.ged"
   },
+  "author": {
+    "name": "Manuel Wieser",
+    "email": "office@manuelwieser.com",
+    "url": "https://manu.ninja/"
+  },
+  "license": "MIT",
   "dependencies": {
     "core-js": "^3.4.4",
     "parse-gedcom": "^1.0.5",

@@ -19,5 +19,5 @@ yarn-error.log*
 
 /*.ged
 graph.json
-bin/*.js
-bin/*.js.map
+bin/**/*.js
+bin/**/*.js.map

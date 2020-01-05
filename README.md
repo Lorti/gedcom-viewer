@@ -1,29 +1,7 @@
-# gedcom-viewer
+# GEDCOM Viewer
 
-## Project setup
-```
-npm install
-```
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.me/manuninja)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+1. `cp /path/to/your/family/tree.ged family.ged`
+1. `npm install`
+1. `npm start`
