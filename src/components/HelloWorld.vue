@@ -1,39 +1,58 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <ul>
-      <li v-for="node in $store.state.nodes" :key="node.id">{{ node.settings.label }}</li>
-    </ul>
-  </div>
+  <svg/>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
+import graph from './graph';
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
-
-  mounted() {
-    this.$store.dispatch('load');
+  async mounted() {
+    await this.$store.dispatch('load');
+    graph(this.$store.state);
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+  g.cluster > rect {
+    fill: none;
+  }
+
+  text {
+    font-weight: lighter;
+    font-size: 0.75rem;
+  }
+
+  .node {
+    cursor: pointer;
+  }
+  .node rect {
+    stroke: #999;
+    fill: #fff;
+  }
+
+  .edgePath path {
+    stroke: #333;
+    fill: none;
+  }
+
+  .highlight path,
+  .highlight rect {
+    stroke: crimson !important;
+    stroke-width: 2 !important;
+  }
+  .highlight text {
+    fill: crimson !important;
+  }
+
+  .highlight--strong path,
+  .highlight--strong rect {
+    stroke: crimson !important;
+    stroke-width: 4 !important;
+  }
+  .highlight--strong text {
+    fill: crimson !important;
+  }
 </style>

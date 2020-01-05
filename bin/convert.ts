@@ -1,13 +1,13 @@
-import {readFileSync, writeFileSync} from 'fs';
-import {parse, Record} from 'parse-gedcom';
-import {findRecordByTag, findRecordsByTag} from './utils';
+import { readFileSync, writeFileSync } from 'fs';
+import { parse, Record } from 'parse-gedcom';
+import { findRecordByTag, findRecordsByTag } from './utils';
 
 import Node = Graph.Node;
 import Family = Graph.Family;
 import Edge = Graph.Edge;
 
 const path = process.argv[2];
-const file = readFileSync(path, {encoding: 'utf-8'});
+const file = readFileSync(path, { encoding: 'utf-8' });
 const tree = parse(file);
 
 const nodes: Array<Node> = findRecordsByTag(tree, 'INDI').map((individual: Record): Node => {
@@ -68,5 +68,5 @@ findRecordsByTag(tree, 'FAM').forEach((record: Record): any => {
 console.log(families.slice(0, 10));
 console.log(edges.slice(0, 10));
 
-const data = JSON.stringify({nodes, families, edges}, null, 2);
-writeFileSync('public/graph.json', data, {encoding: 'utf-8'});
+const data = JSON.stringify({ nodes, families, edges }, null, 2);
+writeFileSync('public/graph.json', data, { encoding: 'utf-8' });
