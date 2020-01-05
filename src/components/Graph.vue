@@ -1,21 +1,43 @@
 <template>
-  <svg/>
+  <div>
+    <div class="container">
+      <svg/>
+    </div>
+    <ModalDialog v-if="selectedNode" :node="selectedNode" @close="selectedNode = undefined"/>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
 import graph from './graph';
+import ModalDialog from '@/components/ModalDialog.vue';
 
-@Component
-export default class HelloWorld extends Vue {
+export default Vue.extend({
+  components: {
+    ModalDialog,
+  },
+  data() {
+    return {
+      selectedNode: undefined as Graph.Node | undefined,
+    };
+  },
   async mounted() {
     await this.$store.dispatch('load');
-    graph(this.$store.state);
-  }
-}
+    const events = graph(this.$store.state);
+    events.$on('select', (node: Graph.Node) => {
+      this.selectedNode = node;
+    });
+  },
+});
 </script>
 
 <style>
+  .container {
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+  }
+
   g.cluster > rect {
     fill: none;
   }

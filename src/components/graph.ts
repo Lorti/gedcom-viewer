@@ -1,5 +1,8 @@
+import Vue from 'vue';
 import * as d3 from 'd3';
 import * as dagreD3 from 'dagre-d3';
+
+const events = new Vue();
 
 // TODO Merge this interface with the (Vuex) State interface.
 interface Data {
@@ -122,9 +125,18 @@ export default function (data: Data) {
   marriages.map(drawMarriage);
 
   function addEventListener(node: Element) {
+    node.addEventListener('click', () => {
+      // TODO Find a more robust way to extract the node ID from HTML classes.
+      const nodeObject = getNode(node.classList[1], data);
+
+      events.$emit('select', nodeObject);
+    });
+
     node.addEventListener('mouseover', () => {
-      document.querySelectorAll('.highlight').forEach(element => element.classList.remove('highlight'));
-      document.querySelectorAll('.highlight--strong').forEach(element => element.classList.remove('highlight--strong'));
+      document.querySelectorAll('.highlight')
+        .forEach(element => element.classList.remove('highlight'));
+      document.querySelectorAll('.highlight--strong')
+        .forEach(element => element.classList.remove('highlight--strong'));
 
       // TODO Find a more robust way to extract the node ID from HTML classes.
       const nodeObject = getNode(node.classList[1], data);
@@ -173,4 +185,6 @@ export default function (data: Data) {
 
   const nodes = document.querySelectorAll('.node');
   nodes.forEach(node => addEventListener(node));
+
+  return events;
 }
