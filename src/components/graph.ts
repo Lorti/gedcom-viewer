@@ -1,11 +1,8 @@
-import Vue from 'vue';
 import * as d3 from 'd3';
 import * as dagreD3 from 'dagre-d3';
 
-const events = new Vue();
-
-// TODO Merge this interface with the (Vuex) State interface.
-interface Data {
+// TODO Merge this interface with the (Vuex) State interface?
+export interface Data {
   nodes: Array<Graph.Node>,
   families: Array<Graph.Family>,
   edges: Array<Graph.Edge>,
@@ -42,7 +39,7 @@ function getParentFamily(node: Graph.Node, data: Data) {
   return getFamily(tail, data);
 }
 
-export default function (data: Data) {
+export default function (data: Data, selectionCallback: (node: Graph.Node) => void) {
   const g = new dagreD3.graphlib.Graph({ compound: true })
     .setGraph({})
     .setDefaultEdgeLabel(() => ({}));
@@ -129,7 +126,9 @@ export default function (data: Data) {
       // TODO Find a more robust way to extract the node ID from HTML classes.
       const nodeObject = getNode(node.classList[1], data);
 
-      events.$emit('select', nodeObject);
+      if (nodeObject) {
+        selectionCallback(nodeObject);
+      }
     });
 
     node.addEventListener('mouseover', () => {
@@ -185,6 +184,4 @@ export default function (data: Data) {
 
   const nodes = document.querySelectorAll('.node');
   nodes.forEach(node => addEventListener(node));
-
-  return events;
 }

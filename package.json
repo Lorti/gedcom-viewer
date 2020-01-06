@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@vue/composition-api": "^0.3.4",
     "core-js": "^3.4.4",
     "d3": "^5.15.0",
     "dagre-d3": "^0.6.4",

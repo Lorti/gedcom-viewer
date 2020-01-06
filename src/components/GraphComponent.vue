@@ -1,43 +1,30 @@
 <template>
-  <div>
-    <div class="container">
-      <svg/>
-    </div>
-    <ModalDialog v-if="selectedNode" :node="selectedNode" @close="selectedNode = undefined"/>
-  </div>
+  <svg v-draw="data"/>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import graph from './graph';
-import ModalDialog from '@/components/ModalDialog.vue';
+import Vue, { PropType } from 'vue';
+import graph, { Data } from './graph';
 
 export default Vue.extend({
-  components: {
-    ModalDialog,
+  props: {
+    data: Object as PropType<Data>,
   },
-  data() {
-    return {
-      selectedNode: undefined as Graph.Node | undefined,
-    };
-  },
-  async mounted() {
-    await this.$store.dispatch('load');
-    const events = graph(this.$store.state);
-    events.$on('select', (node: Graph.Node) => {
-      this.selectedNode = node;
-    });
+  directives: {
+    draw(el, binding, vnode) {
+      if (binding.value) {
+        graph(binding.value, (node: Graph.Node) => {
+          if (vnode.context) {
+            vnode.context.$emit('select', node);
+          }
+        });
+      }
+    },
   },
 });
 </script>
 
 <style>
-  .container {
-    width: 100vw;
-    height: 100vh;
-    overflow: scroll;
-  }
-
   g.cluster > rect {
     fill: none;
   }

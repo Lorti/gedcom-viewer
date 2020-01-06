@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Graph/>
+    <Viewer/>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Graph from './components/Graph.vue';
+import Viewer from './components/Viewer.vue';
 
 export default Vue.extend({
   components: {
-    Graph,
+    Viewer,
   },
 });
 </script>
